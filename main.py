@@ -124,6 +124,19 @@ class Bank:
                 Bank.__update()
                 return
         print("Invalid account number or pin")
+
+
+    def __deleteAccount(self):
+        account = input("Enter your account number:")
+        pin = int(input("Enter your pin:"))
+
+        for i in Bank.data:
+            if i["account no"] == account and i["pin"] == pin:
+                Bank.data.remove(i)
+                print("Account deleted successfully")
+                Bank.__update()
+                return
+        print("Invalid account number or pin")
     
 
 user = Bank()
@@ -150,3 +163,6 @@ if(check == 4):
 
 if(check == 5):
     user.__updateDetails()
+
+if(check == 6):
+    user.__deleteAccount()
