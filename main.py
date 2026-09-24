@@ -68,6 +68,64 @@ class Bank:
                 return
         print("Invalid account number or pin")
 
+    def __withdrawal(self):
+        account = input("Enter your account number:")
+        pin = int(input("Enter your pin:"))
+        amount = int(input("Enter the amount to withdraw:"))
+
+        for i in Bank.data:
+            if i["account no"] == account and i["pin"] == pin:
+                if i["balance"] >= amount:
+                    i["balance"] -= amount
+                    print(f"Amount withdrawn successfully. New balance is {i['balance']}")
+                    Bank.__update()
+                    return
+                else:
+                    print("Insufficient balance")
+                    return
+        print("Invalid account number or pin")
+
+
+    def __details(self):
+        account = input("Enter your account number:")
+        pin = int(input("Enter your pin:"))
+
+        for i in Bank.data:
+            if i["account no"] == account and i["pin"] == pin:
+                print(f"Name: {i['name']}")
+                print(f"Age: {i['age']}")
+                print(f"Email: {i['email']}")
+                print(f"Account Number: {i['account no']}")
+                print(f"Balance: {i['balance']}")
+                return
+        print("Invalid account number or pin")
+
+    def __updateDetails(self):
+        account = input("Enter your account number:")
+        pin = int(input("Enter your pin:"))
+
+        for i in Bank.data:
+            if i["account no"] == account and i["pin"] == pin:
+                print("What do you want to update?")
+                print("press 1 for name")
+                print("press 2 for age")
+                print("press 3 for email")
+                check = int(input("Enter your choice:"))
+                if check == 1:
+                    i["name"] = input("Enter your new name:")
+                elif check == 2:
+                    i["age"] = int(input("Enter your new age:"))
+                elif check == 3:
+                    i["email"] = input("Enter your new email:")
+                else:
+                    print("Invalid choice")
+                    return
+                print("Details updated successfully")
+                Bank.__update()
+                return
+        print("Invalid account number or pin")
+    
+
 user = Bank()
 print("press 1 for creating an account")
 print("press 2 for Deposit")
@@ -83,3 +141,12 @@ if check ==1:
 
 if(check == 2):
     user.__deposit()
+
+if(check == 3):
+    user.__withdrawal()
+
+if(check == 4):
+    user.__details()
+
+if(check == 5):
+    user.__updateDetails()
